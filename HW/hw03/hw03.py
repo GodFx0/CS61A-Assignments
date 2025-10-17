@@ -47,7 +47,11 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    one_ten_dis = abs(n % 10 - n // 10 % 10)
+    if n < 10:
+        return 0
+    total_dis = one_ten_dis + digit_distance(n // 10)
+    return total_dis
 
 def interleaved_sum(n, odd_func, even_func):
     """Compute the sum odd_func(1) + even_func(2) + odd_func(3) + ..., up
@@ -71,6 +75,15 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
+    def k_n_interleaved_sum(k, n, odd_func, even_func):
+        if k == n :
+            return odd_func(n)
+        if k > n:
+            return 0
+
+        return odd_func(k) + even_func(k + 1) + k_n_interleaved_sum(k + 2, n, odd_func, even_func)
+
+    return k_n_interleaved_sum(1, n, odd_func, even_func)
 
 
 def next_smaller_dollar(bill):
@@ -107,6 +120,20 @@ def count_dollars(total):
     True
     """
     "*** YOUR CODE HERE ***"
+
+
+    def cur_bill_count(total, largest_bill):
+        if total == 0:
+                return 1
+        if total < 0:
+                return 0
+        if largest_bill == None:
+                return 0
+
+        return cur_bill_count(total - largest_bill, largest_bill) + cur_bill_count(total, next_smaller_dollar(largest_bill))
+
+
+    return cur_bill_count(total, 100)
 
 
 def next_larger_dollar(bill):
