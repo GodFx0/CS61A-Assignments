@@ -116,16 +116,11 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
-    def mode(n):
-        if n % 5 == 0:
-            return lambda x:x
-        elif n % 5 == 1:
-            return lambda x:f1(x)
-        elif n % 5 == 2:
-            return lambda x:f2(f1(x))
-        elif n % 5 == 3:
-            return lambda x:f3(f2(f1(x)))
-        elif n % 5 == 4:
-            return lambda x:f1(f3(f2(f1(x))))
-
-    return mode
+    def g(n):
+        def h(x):
+            if n == 0:
+                return x
+            else:
+                return cycle(f2, f3, f1)(n-1)(f1(x))
+        return h
+    return g

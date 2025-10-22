@@ -53,6 +53,7 @@ def digit_distance(n):
     total_dis = one_ten_dis + digit_distance(n // 10)
     return total_dis
 
+
 def interleaved_sum(n, odd_func, even_func):
     """Compute the sum odd_func(1) + even_func(2) + odd_func(3) + ..., up
     to n.
@@ -75,8 +76,9 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
+
     def k_n_interleaved_sum(k, n, odd_func, even_func):
-        if k == n :
+        if k == n:
             return odd_func(n)
         if k > n:
             return 0
@@ -98,6 +100,7 @@ def next_smaller_dollar(bill):
         return 5
     elif bill == 5:
         return 1
+
 
 def count_dollars(total):
     """Return the number of ways to make change.
@@ -121,17 +124,29 @@ def count_dollars(total):
     """
     "*** YOUR CODE HERE ***"
 
+    def count_with_dollar(total, max_dollar):
+        if total == 0:
+            return 1
+        if total < 0:
+            return 0
+        if max_dollar == None:
+            return 0
+
+        return count_with_dollar(total, next_smaller_dollar(max_dollar)) + count_with_dollar(total - max_dollar,
+                                                                                             max_dollar)
+
+    return count_with_dollar(total, 100)
 
     def cur_bill_count(total, largest_bill):
         if total == 0:
-                return 1
+            return 1
         if total < 0:
-                return 0
+            return 0
         if largest_bill == None:
-                return 0
+            return 0
 
-        return cur_bill_count(total - largest_bill, largest_bill) + cur_bill_count(total, next_smaller_dollar(largest_bill))
-
+        return cur_bill_count(total - largest_bill, largest_bill) + cur_bill_count(total,
+                                                                                   next_smaller_dollar(largest_bill))
 
     return cur_bill_count(total, 100)
 
@@ -148,6 +163,7 @@ def next_larger_dollar(bill):
         return 50
     elif bill == 50:
         return 100
+
 
 def count_dollars_upward(total):
     """Return the number of ways to make change using bills.
@@ -175,6 +191,7 @@ def count_dollars_upward(total):
 def print_move(origin, destination):
     """Print instructions to move a disk."""
     print("Move the top disk from rod", origin, "to rod", destination)
+
 
 def move_stack(n, start, end):
     """Print the moves required to move n disks on the start pole to the end
@@ -209,6 +226,7 @@ def move_stack(n, start, end):
 
 from operator import sub, mul
 
+
 def make_anonymous_factorial():
     """Return the value of an expression that computes factorial.
 
@@ -221,4 +239,3 @@ def make_anonymous_factorial():
     True
     """
     return 'YOUR_EXPRESSION_HERE'
-
