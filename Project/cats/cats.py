@@ -38,7 +38,15 @@ def pick(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    num = -1
+    for item in paragraphs:
+        if select(item):
+            num += 1
+            if num == k:
+                return item
+    return ''
     # END PROBLEM 1
+
 
 
 def about(subject):
@@ -58,6 +66,17 @@ def about(subject):
 
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    def select(paragraph):
+        word_list = paragraph.split()
+        word_list = list(map(lower, word_list))
+        word_list = list(map(remove_punctuation, word_list))
+        for i in subject:
+            for j in word_list:
+                if i == j:
+                    return True
+        return False
+
+    return select
     # END PROBLEM 2
 
 
@@ -215,17 +234,17 @@ def minimum_mewtations(typed, source, limit):
     3
     """
     assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
+    if ___________:  # Base cases should go here, you may add more base cases as needed.
         # BEGIN
         "*** YOUR CODE HERE ***"
         # END
     # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
+    if ___________:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
         # END
     else:
-        add = ... # Fill in these lines
+        add = ...  # Fill in these lines
         remove = ...
         substitute = ...
         # BEGIN
@@ -324,7 +343,7 @@ def fastest_words(words_and_times):
     check_words_and_times(words_and_times)  # verify that the input is properly formed
     words, times = words_and_times['words'], words_and_times['times']
     player_indices = range(len(times))  # contains an *index* for each player
-    word_indices = range(len(words))    # contains an *index* for each word
+    word_indices = range(len(words))  # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
     # END PROBLEM 10
@@ -347,12 +366,13 @@ def get_time(times, player_num, word_index):
     given a list of lists of times returned by time_per_word."""
     num_players = len(times)
     num_words = len(times[0])
-    assert word_index < len(times[0]), f"word_index {word_index} outside of 0 to {num_words-1}"
-    assert player_num < len(times), f"player_num {player_num} outside of 0 to {num_players-1}"
+    assert word_index < len(times[0]), f"word_index {word_index} outside of 0 to {num_words - 1}"
+    assert player_num < len(times), f"player_num {player_num} outside of 0 to {num_players - 1}"
     return times[player_num][word_index]
 
 
 enable_multiplayer = False  # Change to True when you're ready to race.
+
 
 ##########################
 # Command Line Interface #
