@@ -107,6 +107,20 @@ def accuracy(typed, source):
     source_words = split(source)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if typed_words == [] and source_words == []:
+        return 100.0
+    elif typed_words == [] or source_words == []:
+        return 0.0
+
+    typed_lenth = len(typed_words)
+    source_lenth = len(source_words)
+    cor_count = 0
+    for i in range(min(typed_lenth, source_lenth)):
+        if typed_words[i] == source_words[i]:
+            cor_count += 1
+
+    return cor_count / typed_lenth * 100.0
+
     # END PROBLEM 3
 
 
@@ -125,6 +139,8 @@ def wpm(typed, elapsed):
     assert elapsed > 0, "Elapsed time must be positive"
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    lenth = len(typed)
+    return 60 / elapsed * (lenth / 5)
     # END PROBLEM 4
 
 
