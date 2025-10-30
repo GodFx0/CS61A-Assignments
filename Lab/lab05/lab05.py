@@ -27,7 +27,13 @@ def insert_items(s, before, after):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    index = 0
+    while index < len(s):
+        if s[index] == before:
+            s.insert(index + 1, after)
+            index += 1
+        index += 1
+    return s
 
 def group_by(s, fn):
     """Return a dictionary of lists that together contain the elements of s.
@@ -40,12 +46,12 @@ def group_by(s, fn):
     {9: [-3, 3], 4: [-2, 2], 1: [-1, 1], 0: [0]}
     """
     grouped = {}
-    for ____ in ____:
-        key = ____
+    for val in s:
+        key = fn(val)
         if key in grouped:
-            ____
+            grouped[key].append(val)
         else:
-            grouped[key] = ____
+            grouped[key] = [val]
     return grouped
 
 
@@ -71,7 +77,13 @@ def count_occurrences(t, n, x):
     2
     """
     "*** YOUR CODE HERE ***"
-
+    count = 0
+    index = 0
+    while index < n:
+        if x == next(t):
+            count += 1
+        index += 1
+    return count
 
 def repeated(t, k):
     """Return the first value in iterator t that appears k times in a row,
@@ -94,6 +106,18 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
+    before = next(t)
+    count = 1
+
+    while True:
+        now = next(t)
+        if now == before:
+            count += 1
+        else:
+            before = now
+            count = 1
+        if count == k:
+            return now
 
 
 def sprout_leaves(t, leaves):
@@ -130,8 +154,10 @@ def sprout_leaves(t, leaves):
           2
     """
     "*** YOUR CODE HERE ***"
-
-
+    if is_leaf(t):
+       return tree(label(t), [tree(leave) for leave in leaves])
+    else:
+        return tree(label(t), [sprout_leaves(branch, leaves) for branch in branches(t)])
 def partial_reverse(s, start):
     """Reverse part of a list in-place, starting with start up to the end of
     the list.
@@ -145,8 +171,14 @@ def partial_reverse(s, start):
     [1, 2, 7, 6, 5, 3, 4]
     """
     "*** YOUR CODE HERE ***"
-
-
+    end = len(s) - 1
+    begin = start
+    while begin <= end:
+        temp = s[begin]
+        s[begin] = s[end]
+        s[end] = temp
+        begin += 1
+        end -= 1
 
 # Tree Data Abstraction
 
